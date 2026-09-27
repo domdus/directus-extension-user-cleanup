@@ -1,4 +1,13 @@
+# Source / build tooling (package.json "files" already whitelists dist + LICENSE + README)
 src
+docs
 tsconfig.json
-node_modules
+package-lock.json
+*.zip
+*.test.ts
 .gitignore
+.npmignore
+.env
+.env.*
+.DS_Store
+node_modules
