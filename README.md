@@ -1,8 +1,8 @@
 # User Cleanup
 
-Review what still points at a Directus user, resolve the references that block deletion, and delete the users from a Studio wizard.
+Delete users that Directus refuses to remove because other items still point at them.
 
-Directus raises a foreign-key error only when a constraint is `NO ACTION` or `RESTRICT` and rows still point at `directus_users`. `SET NULL` clears the column, `CASCADE` removes the related rows, and a column with no constraint — such as `directus_activity.user` — leaves the stored id in place. This extension lists every reference from the live schema and database catalog, marks which ones block, and applies the resolution you confirm.
+Some of those items' fields block the delete until they are cleared or pointed at someone else. User Cleanup lists every field, marks it **Blocking** or **Not blocking**, and applies the action you choose. Nothing is written until you confirm.
 
 Open **User Cleanup** from the left bar (**admins only**).
 
