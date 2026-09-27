@@ -1,0 +1,66 @@
+{
+	"name": "directus-extension-user-cleanup",
+	"description": "Review references that block user deletion, resolve them, and delete users from a Studio wizard",
+	"icon": "person_remove",
+	"version": "1.0.0",
+	"license": "MIT",
+	"keywords": [
+		"directus",
+		"directus-extension",
+		"directus-extension-bundle",
+		"user-cleanup",
+		"users",
+		"delete",
+		"foreign-key",
+		"offboarding"
+	],
+	"type": "module",
+	"files": [
+		"dist",
+		"LICENSE",
+		"README.md"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/domdus/directus-extension-user-cleanup.git"
+	},
+	"bugs": {
+		"url": "https://github.com/domdus/directus-extension-user-cleanup/issues"
+	},
+	"homepage": "https://github.com/domdus/directus-extension-user-cleanup#readme",
+	"directus:extension": {
+		"type": "bundle",
+		"path": {
+			"app": "dist/app.js",
+			"api": "dist/api.js"
+		},
+		"entries": [
+			{
+				"type": "module",
+				"name": "user-cleanup-module",
+				"source": "src/module/index.ts"
+			},
+			{
+				"type": "endpoint",
+				"name": "user-cleanup-endpoint",
+				"source": "src/endpoint/index.ts"
+			}
+		],
+		"host": ">=9.26.0 <13.0.0"
+	},
+	"scripts": {
+		"build": "directus-extension build",
+		"dev": "directus-extension build -w --no-minify",
+		"link": "directus-extension link",
+		"add": "directus-extension add",
+		"test": "tsx src/shared/policy.test.ts"
+	},
+	"devDependencies": {
+		"@directus/extensions-sdk": "^17.0.0",
+		"@types/express": "^4.17.21",
+		"@types/node": "^20.0.0",
+		"tsx": "^4.20.5",
+		"typescript": "^5.0.0",
+		"vue": "^3.3.7"
+	}
+}
