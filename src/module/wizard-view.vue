@@ -63,7 +63,7 @@
 
 			<template v-else-if="step === 0">
 				<div class="toolbar">
-					<v-input v-model="search" class="search" placeholder="Filter Users…" />
+					<v-input v-model="search" class="search" placeholder="Filter Users…" :nullable="false" />
 					<div class="scope-radios">
 						<v-radio v-model="statusScope" value="all" label="All" />
 						<v-radio v-model="statusScope" value="active" label="Active" />
@@ -317,7 +317,7 @@ const reassignTo = ref('');
 const referenceScope = ref<'all' | 'blocking' | 'open'>('all');
 
 const filtered = computed(() => {
-	const query = search.value.trim().toLowerCase();
+	const query = String(search.value ?? '').trim().toLowerCase();
 	return users.value.filter((user) => {
 		if (statusScope.value === 'active' && user.status !== 'active') return false;
 		if (statusScope.value === 'inactive' && user.status === 'active') return false;
