@@ -2,7 +2,7 @@
 	"name": "directus-extension-user-cleanup",
 	"description": "Review references that block user deletion, resolve them, and delete users from a Studio wizard",
 	"icon": "person_remove",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"license": "MIT",
 	"keywords": [
 		"directus",

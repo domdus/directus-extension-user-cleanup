@@ -31,16 +31,6 @@
 		</template>
 
 		<div :class="pageClass">
-			<v-divider
-				class="section-divider"
-				large
-				:inline-title="false"
-				:style="{ '--v-divider-color': 'var(--theme--border-color-subdued)' }"
-			>
-				<template #icon><v-icon name="person_remove" /></template>
-				Wizard
-			</v-divider>
-
 			<p class="page-intro">
 				Select users, review what still points at them, choose how to resolve each reference, then delete.
 				Nothing is changed until you confirm.
@@ -566,10 +556,6 @@ onMounted(async () => {
 
 .page-container--flush-top {
 	padding-block-start: 0;
-}
-
-.section-divider {
-	margin-bottom: 12px;
 }
 
 .page-intro,
