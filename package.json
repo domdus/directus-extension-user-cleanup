@@ -2,7 +2,7 @@
 	"name": "directus-extension-user-cleanup",
 	"description": "Review references that block user deletion, resolve them, and delete users from a Studio wizard",
 	"icon": "person_remove",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"license": "MIT",
 	"keywords": [
 		"directus",
@@ -60,11 +60,14 @@
 		"test:e2e": "npm run build && node test/e2e/run.mjs"
 	},
 	"devDependencies": {
-		"@directus/extensions-sdk": "^17.0.0",
+		"@directus/extensions-sdk": "^18.1.0",
 		"@types/express": "^4.17.21",
 		"@types/node": "^20.19.43",
 		"tsx": "^4.23.15",
 		"typescript": "^5.0.0",
 		"vue": "^3.3.7"
+	},
+	"overrides": {
+		"joi": "18.3.1"
 	}
 }
