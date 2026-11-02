@@ -5,6 +5,7 @@ import { applyResolution, getClientName, listUserReferences } from '../shared/re
 import type { AppliedResolution, CleanupUser, Resolution } from '../shared/types';
 
 type EndpointExtensionContext = {
+	services: Record<string, any>;
 	database: any;
 	getSchema: () => Promise<any>;
 	logger: {
@@ -161,7 +162,7 @@ async function forceDeleteAuthRows(database: any, userIds: string[]): Promise<Ap
 }
 
 export default (router: Router, context: EndpointExtensionContext) => {
-	const { database, getSchema, logger } = context;
+	const { services, database, getSchema, logger } = context;
 
 	router.get('/', async (req: Request, res: Response) => {
 		if (!requireAdmin(req, res)) return;
@@ -300,6 +301,21 @@ export default (router: Router, context: EndpointExtensionContext) => {
 				}
 
 				await trx('directus_users').whereIn('id', verdict.userIds).delete();
+
+				// The raw delete above skips UsersService, so nothing else records who removed these accounts.
+				const accountability = (req as any).accountability;
+				const activity = new services.ActivityService({ knex: trx, schema });
+				for (const id of verdict.userIds) {
+					await activity.createOne({
+						action: 'delete',
+						user: selfId,
+						collection: 'directus_users',
+						item: id,
+						ip: accountability?.ip ?? null,
+						user_agent: accountability?.userAgent ?? null,
+						origin: accountability?.origin ?? null,
+					});
+				}
 				return { deletedUserIds: verdict.userIds, applied };
 			});
 
